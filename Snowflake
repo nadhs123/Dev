@@ -1,0 +1,22 @@
+                                                  SNOWFLAKE REAL TIME USE CASES  & INTERVIEW QUESTIONS 
+•	How to find all the objects used in a snowflake view?
+
+Syntax: -  select * from table (get_object_references(database name=> ‘in which database you created the view’ , schema name =>’ schema’, object name =>’ it means the view name’));
+
+•	How to resolve numeric value not recognized error in snowflake ?
+
+	First we need to identify which column has NUMBER data type 
+Select * from information_schema.columns where table_name =’tablename’ and data type=’number’
+
+	Next step is to use try_to_number error handling function to identify error value records
+Select * from table_name where try_to_number (column_name) is null or
+Try_to_decimal (column_name) is null ;
+	By this we can fetch the error records in a table 
+
+•	How to save rejected rows while executing copy command?
+
+Syntax: - create or replace table rejected_rows as select * from table (validate(db.schema,table_name, job_id>= ‘_last’));
+
+
+ 
+
